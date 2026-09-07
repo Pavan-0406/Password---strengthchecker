@@ -17,10 +17,10 @@ public class PasswordChecker extends JFrame {
     private JLabel strengthLabel;
     private JLabel[] requirementLabels;
     private final String[] requirements = {
-        "At least 6 characters",
+        "At least 8 characters",
         "Contains an uppercase letter",
         "Contains a number",
-        "Contains a special character (@#$&)"
+        "Contains a special character (@#$%^&+=!)"
     };
 
     public PasswordChecker() {
@@ -109,11 +109,10 @@ public class PasswordChecker extends JFrame {
         char[] passwordChars = passwordField.getPassword();
         String password = new String(passwordChars);
         
-        // Logical evaluation synced perfectly with your updated requirements
-        boolean hasMinLength = password.length() >= 6;
-        boolean hasUppercase = password.matches(".*[A-Z].*");
+        boolean hasMinLength = password.length() >= 8;
+        boolean hasUppercase = !password.equals(password.toLowerCase());
         boolean hasDigit = password.matches(".*\\d.*");
-        boolean hasSpecial = Pattern.compile("[@#$&]").matcher(password).find();
+        boolean hasSpecial = Pattern.compile("[@#$%^&+=!]").matcher(password).find();
 
         int score = 0;
         if (!password.isEmpty()) {
